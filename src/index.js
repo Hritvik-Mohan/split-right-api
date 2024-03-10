@@ -1,11 +1,23 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const connectDB = require("./config/database");
+const userRoutes = require("./routes/userRoutes");
+const cors = require("cors");
+
+// Connect to database
+connectDB();
+
 const app = express();
-const port = 3000;
+const PORT = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello');
-});
+app.use(cors());
 
-app.listen(port, function () {
-    console.log(`App listening on port ${port}`);
+// Middleware
+app.use(bodyParser.json());
+
+// Routes
+app.use("/api/user", userRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
