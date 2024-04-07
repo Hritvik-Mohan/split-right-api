@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/database");
-const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
 const dashboardRoute = require("./routes/dashboardRoute");
 
 const cors = require("cors");
@@ -11,7 +11,7 @@ require('dotenv').config()
 connectDB();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 
@@ -19,7 +19,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes Middleware
-app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoute);
 
 app.listen(PORT, () => {

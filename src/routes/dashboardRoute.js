@@ -2,7 +2,7 @@ const router = require("express").Router();
 const verify = require("./verifyToken");
 const User = require("../models/user");
 
-router.get("/", verify, async (req, res) => {
+router.get("/user", verify, async (req, res) => {
   try {
     const user = await User.findById(req.user);
     console.log(user);
