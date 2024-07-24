@@ -3,9 +3,9 @@ const router = express.Router();
 const expenseController = require('../controllers/expenseController');
 
 
-router.post('/expenses', expenseController.createExpense);
-router.get('expenses/:id', expenseController.getExpense);
-router.put('/expenses/:id', expenseController.updateExpense);
+router.post('/expense', expenseController.createExpense);
+router.get('/expense/:id', expenseController.getExpense);
+router.put('/expense/:id', expenseController.updateExpense);
 router.delete('/expense/:id', expenseController.deleteExpense);
 
 

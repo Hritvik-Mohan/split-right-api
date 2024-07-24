@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const ExpenseSchema = new mongoose.Schema({
     title: {
@@ -38,7 +39,7 @@ const ExpenseSchema = new mongoose.Schema({
         required: true
     },
     group_id: {
-        type: Schema.Type.ObjectId, ref: 'Group'
+        type: Schema.Types.ObjectId, ref: 'Group'
     },
     division_type: {
         type: String,
