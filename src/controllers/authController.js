@@ -40,6 +40,48 @@ exports.register = async (req, res) => {
   }
 };
 
+exports.getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({
+      error: err.message
+    });
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.findByIdAndUpdate(req.params.id, {
+      username,
+      email,
+      password: hashedPassword,
+      updated_at: Date.now()
+    }, { new: true });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({
+      error: err.message
+    })
+  }
+}
+
+exports.deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      message: "User Deleted"
+    })
+  } catch (err) {
+    res.status(500).json({ 
+      error: err.message 
+    })
+  }
+}
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
